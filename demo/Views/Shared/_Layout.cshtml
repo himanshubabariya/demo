@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Demo</title>
+    @*   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AdddressBook.styles.css" asp-append-version="true" />*@
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="~/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="~/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="~/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="~/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner ">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="index.html">
+                        <h5>Student</h5>
+
+                    </a>
+                    <div class="menu-toggler sidebar-toggler">
+                        <span></span>
+                    </div>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <!-- END HEADER & CONTENT DIVIDER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- BEGIN SIDEBAR -->
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <li class="sidebar-toggler-wrapper hide">
+                            <div class="sidebar-toggler">
+                                <span></span>
+                            </div>
+                        </li>
+                        <!-- END SIDEBAR TOGGLER BUTTON -->
+                        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+
+                        <li class="heading">
+                            <h3 class="uppercase">Add/Edit</h3>
+                        </li>
+                        <li class="nav-item ">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link nav-toggle">
+                                <i class=""></i>
+                                <span class="title">Home</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Index" class="nav-link nav-toggle">
+                                <i class=""></i>
+                                <span class="title">Country</span>
+                            </a>
+                        </li>
+                        @* <li class="nav-item ">
+                        <a asp-area="" asp-controller="LOC_State" asp-action="Index" class="nav-link nav-toggle">
+                        <i class=""></i>
+                        <span class="title">State</span>
+                        </a>
+                        </li>
+                        <li class="nav-item ">
+                        <a asp-area="" asp-controller="LOC_City" asp-action="Index" class="nav-link nav-toggle">
+                        <i class=""></i>
+                        <span class="title">City</span>
+                        </a>
+                        </li>
+                        <li class="nav-item ">
+                        <a asp-area="" asp-controller="CON_Contact" asp-action="Index" class="nav-link nav-toggle">
+                        <i class=""></i>
+                        <span class="title">Contact</span>
+                        </a>
+                        </li>
+                        <li class="nav-item ">
+                        <a asp-area="" asp-controller="CON_Category" asp-action="Index" class="nav-link nav-toggle">
+                        <span class="title">Category</span>
+                        </a>
+                        </li>*@
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                    <!-- END SIDEBAR MENU -->
+                </div>
+                <!-- END SIDEBAR -->
+            </div>
+
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted" align="center">
+        <div class="container">
+            &copy; 2022 - AdddressBook BY himanshu Babariya- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="~/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="~/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/pages/scripts/table-datatables-scroller.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="~/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="~/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="~/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "CountryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Data;
+@model DataTable
+
+
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE TITLE-->
+        <!-- END PAGE TITLE-->
+        <!-- END PAGE HEADER-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light portlet-fit bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject font-red sbold uppercase">Country List</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col col-md-9">
+                                    <a class="btn btn-success" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Add">Add Country</a>
+                                </div>
+                                <div class="col col-md-3">
+                                    <div id="sample_4_filter" class="dataTables_filter">
+                                        <input type="search" id="myInput" class="form-control form-input border-dark input-medium  rounded-3" placeholder="Search Country..." aria-controls="sample_4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>@TempData["CountryInsertMsg"]</h3>
+                        <table class="table table-striped table-hover table-bordered text-center" id="sample_editable_1">
+                            <thead>
+                                <tr class="text-center">
+                                    <th class="text-center"> No </th>
+                                    <th class="text-center"> Country Name </th>
+                                    <th class="text-center"> Country Code </th>
+                                    @*  <th class="text-center"> Photo  </th>*@
+                                    <th class="text-center"> Add Date </th>
+                                    <th class="text-center"> Modified Date </th>
+                                    <th class="text-center"> Edit </th>
+                                    <th class="text-center"> Delete </th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                @{
+                                    int i = 1;
+
+                                }
+                                @foreach (DataRow dr in Model.Rows)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@dr["CountryName"]</td>
+                                        <td>@dr["CountryCode"]</td>
+                                        @*<td><img src="@Url.Content(dr["PhotoPath"].ToString())" style="height:auto;width:50px" /></td>*@
+                                        <td>@Convert.ToDateTime(dr["CountryAddDate"]).ToString("dd-MM-yyyy")</td>
+                                        <td>@Convert.ToDateTime(dr["CountryModifiedDate"]).ToString("dd-MM-yyyy")</td>
+
+                                        <td>
+                                            <form method="post" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Add">
+                                                <input type="hidden" name="CountryID" value="@Convert.ToInt32(dr["CountryID"])" />
+                                                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Edit : @dr["CountryName"]')">Edit</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" asp-controller="LOC_Country" asp-action="Delete">
+                                                <input type="hidden" name="CountryID" value="@Convert.ToInt32(dr["CountryID"])" />
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete : @dr["CountryName"]')">Delete</button>
+
+                                            </form> 
+                                        </td>
+                                    </tr>
+                                    i++;
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+   }
