@@ -27,7 +27,7 @@
                         <div class="table-toolbar">
                             <div class="row">
                                 <div class="col col-md-9">
-                                    <a class="btn btn-success" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Add">Add Country</a>
+                                    <a class="btn btn-success"  asp-controller="LOC_Country" asp-action="Add">Add Country</a>
                                 </div>
                                 <div class="col col-md-3">
                                     <div id="sample_4_filter" class="dataTables_filter">
@@ -65,7 +65,7 @@
                                         <td>@Convert.ToDateTime(dr["CountryAddDate"]).ToString("dd-MM-yyyy")</td>
                                         <td>@Convert.ToDateTime(dr["CountryModifiedDate"]).ToString("dd-MM-yyyy")</td>
                                         <td>
-                                            <form method="post" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Add">
+                                            <form method="post" asp-controller="LOC_Country" asp-action="Add">
                                                 <input type="hidden" name="CountryID" value="@Convert.ToInt32(dr["CountryID"])" />
                                                 <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Edit : @dr["CountryName"]')">Edit</button>
                                             </form>

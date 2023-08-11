@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "AddCountry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model demo.Areas.LOC_Country.Models.LOC_CountryModel
+
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE TITLE-->
+        <!-- END PAGE TITLE-->
+        <!-- END PAGE HEADER-->
+
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="row">
+                    <div class="caption font-green-haze col-md-10">
+                        <i class="icon-plus font-green"></i>
+                        <span class="caption-subject bold uppercase"> Add Country</span>
+                    </div>
+                    <div class="caption font-green-haze" style="float:right">
+                        <a class="btn btn-success" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+               
+
+            </div>
+            <div class="portlet-body form">
+               
+
+                <form role="form" class="form-horizontal" asp-controller="LOC_Country" asp-action="Save"  enctype="multipart/form-data">
+                    @Html.HiddenFor(x=>x.CountryID)
+                    @Html.HiddenFor(x=>x.PhotoPath)
+
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">*Country Name</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control " id="form_control_1" asp-for="CountryName" placeholder="Enter Country Name">
+                                <span asp-validation-for="CountryName" class="text-danger"></span>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">*Country Code</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="form_control_1" asp-for="CountryCode" placeholder="Enter Country Code">
+                                <span asp-validation-for="CountryCode" class="text-danger"></span>
+
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">Photo Path</label>
+                            <div class="col-md-10">
+                                <input type="file" class="form-control" id="form_control_1" asp-for="File" placeholder="Upload File">
+
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-success" />
+                                <a class="btn btn-danger" value="Cancel" asp-controller="LOC_Country" asp-action="Index">Cancel</a>
+                                <br />
+
+                               
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- END CONTENT BODY -->
+</div>
+
+<!-- END CONTENT -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
