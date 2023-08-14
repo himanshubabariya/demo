@@ -28,16 +28,15 @@ namespace demo.Areas.LOC_Country.Controllers
         public IActionResult Index()
         {
             string connectionstr = this.Configuration.GetConnectionString("myConnectionStrings");
-
-            SqlDatabase sqlDB = new SqlDatabase(connectionstr);
-            DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_LOC_Country_SelectAll");
-
+            SqlConnection conn = new SqlConnection(connectionstr);
+            conn.Open();
+            SqlCommand objcmd = conn.CreateCommand();
+            objcmd.CommandType = System.Data.CommandType.StoredProcedure;
+            objcmd.CommandText = "PR_LOC_Country_SelectAll";
+          
             DataTable dt = new DataTable();
-            using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
-            {
-                dt.Load(dr);
-            }
-
+            SqlDataReader objSDR = objcmd.ExecuteReader();
+            dt.Load(objSDR);
             return View("Index", dt);
         }
         #endregion
