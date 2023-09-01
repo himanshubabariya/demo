@@ -1,0 +1,155 @@
+@model AddressBook1.Models.LOC_CityModel
+
+@{
+    ViewData["Title"] = "AddCity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE TITLE-->
+        <!-- END PAGE TITLE-->
+        <!-- END PAGE HEADER-->
+
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="row">
+                    <div class="caption font-green-haze col-md-10">
+                        <i class="icon-plus font-green"></i>
+                        <span class="caption-subject bold uppercase"> Add City</span>
+                    </div>
+                    <div class="caption font-green-haze" style="float:right">
+                        <a class="btn btn-success" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="portlet-body form">
+                <h3>@TempData["CountryInsertMsg"]</h3>
+
+                <form role="form" class="form-horizontal" asp-controller="LOC_City" asp-action="Save" enctype="multipart/form-data">
+                    @Html.HiddenFor(x=>x.CityID)
+                    @Html.HiddenFor(x=>x.PhotoPath2)
+
+
+                    <div class="form-body">
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">*Select Country Name</label>
+                            <div class="col-md-10">
+                                <select  class="form-control edited" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))" onchange="(stateChange())">
+                                    <option class="form-group">Select Country</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">*Select State Name</label>
+                            <div class="col-md-10">
+                                <select asp-for="StateID" class="form-control edited" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                                    <option class="form-group">Select State</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">*City Name</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control " id="form_control_1" asp-for="CityName" placeholder="Enter City Name">
+                                <span asp-validation-for="CityName" class="text-danger"></span>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">*CityCode</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control " id="form_control_1" asp-for="CityCode" placeholder="Enter CityCode ">
+                                <span asp-validation-for="CityCode" class="text-danger"></span>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">*CityPincode</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control " id="form_control_1" asp-for="CityPincode" placeholder="Enter CityPincode">
+                                <span asp-validation-for="CityPincode" class="text-danger"></span>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-2 control-label" for="form_control_1">Photo Path</label>
+                            <div class="col-md-10">
+                                <input type="file" class="form-control" id="form_control_1" asp-for="File2" placeholder="Upload File">
+
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-10 ">
+                                <input type="submit" class="btn btn-success" />
+                                <input type="submit" class="btn btn-danger" value="Cancel" asp-controller="LOC_City" asp-action="AddCity" />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- END CONTENT BODY -->
+    </div>
+</div>
+<!-- END CONTENT -->
+
+@section Scripts{
+    <script>
+        function stateChange() {
+            var CountryID = $("#CountryID").val();
+
+
+            if (CountryID !== "") {
+                $("#StateID").empty();
+                $("#StateID").append($("<option></option>").val("").html("Select State"));
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("DropDownByCountry","LOC_City")" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result,
+                                function (key, value) {
+                                    $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                                });
+                        },
+                        error: function (r) {
+                            alert("Error while loading combobox.");
+                        }
+                    });
+            } else {
+                $("#StateID").empty();
+                $("#StateID").append($("<option></option>").val("").html("Select State"));
+
+            }
+        }
+    </script>
+    }
+
